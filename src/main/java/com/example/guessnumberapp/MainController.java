@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 
 import java.util.Objects;
 
-public class HelloController {
+public class MainController {
     @FXML
     private Label hintLabel, countLabel, timerLabel;
 
