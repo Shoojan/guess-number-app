@@ -13,9 +13,9 @@ import javafx.scene.text.Font;
 
 import java.util.Objects;
 
-public class MainController {
+public class MainController implements IRootController {
     @FXML
-    private Label hintLabel, countLabel, timerLabel;
+    private Label welcomeLabel, hintLabel, countLabel, timerLabel;
 
     @FXML
     private TextField numberInputTextField;
@@ -28,9 +28,21 @@ public class MainController {
 
     int systemGeneratedNumber, guessCount;
     String hint = "";
-    int COUNT_DOWN = 3;
+    int COUNT_DOWN = 30;
     private final IntegerProperty countDownTime = new SimpleIntegerProperty();
     private boolean stopCountdown = false;
+
+    private MainApplication mainApp;
+    private String username;
+
+    public void setMainApp(MainApplication mainApp) {
+        this.mainApp = mainApp;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+        welcomeLabel.setText("Welcome to Number Guess, " + username);
+    }
 
     private int generateRandomNumber() {
         int randomNumber = (int) (Math.random() * 100) + 1;
@@ -40,7 +52,7 @@ public class MainController {
         Tooltip tooltip = new Tooltip();
         tooltip.setText("Hint: " + hint);
         tooltip.setFont(Font.font("Comic Sans MS", 12));
-        tooltip.setGraphic(getHintIcon());
+//        tooltip.setGraphic(getHintIcon());
         Tooltip.install(imageView, tooltip);
 
 
@@ -166,7 +178,7 @@ public class MainController {
     private void showCongratsDialog() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Bravo!!!");
-        alert.setHeaderText("Congratulations!\n\nYou guessed it right.");
+        alert.setHeaderText("Congratulations "+username+"!\n\nYou guessed it right.");
         alert.setContentText("Correct Number: %d\nTotal attempts: %d".formatted(systemGeneratedNumber, guessCount));
 
         ImageView congratsIcon = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/congrats.png"))));
@@ -180,7 +192,7 @@ public class MainController {
     private void showGameOverDialog() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("😭😭😭!!!");
-        alert.setHeaderText("Game Over!\n\nWhy God Why 😭?.");
+        alert.setHeaderText("Game Over!\n\nWhy "+username+" Why 😭?.");
         alert.setContentText("Correct Number: %d\nTotal attempts: %d".formatted(systemGeneratedNumber, guessCount));
 
         ImageView congratsIcon = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/game_over.png"))));
