@@ -25,7 +25,7 @@ public class MainApplication extends Application {
         loginController.setMainApp(this);
 
         Stage loginStage = new Stage(StageStyle.DECORATED);
-        loginStage.setTitle("Login");
+        loginStage.setTitle("Welcome");
         loginStage.setScene(new Scene(loginRoot));
         loginStage.show();
         return loginStage;
