@@ -6,9 +6,12 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import java.util.Objects;
@@ -24,7 +27,7 @@ public class MainController implements IRootController {
     private ImageView imageView;
 
     @FXML
-    private Button startButton, hintButton, guessButton;
+    private Button startButton, guessButton;
 
     int systemGeneratedNumber, guessCount;
     String hint = "";
@@ -63,7 +66,6 @@ public class MainController implements IRootController {
     @FXML
     private void initialize() {
         timerLabel.textProperty().bind(Bindings.format("Time remaining: %d", countDownTime));
-        hintButton.setVisible(false);
         disableButtons(true);
         numberInputTextField.setOnMouseClicked(event -> numberInputTextField.selectAll());
     }
@@ -159,7 +161,6 @@ public class MainController implements IRootController {
     }
 
     private void disableButtons(boolean flag) {
-        hintButton.setDisable(flag);
         guessButton.setDisable(flag);
         numberInputTextField.setDisable(flag);
     }
@@ -178,7 +179,7 @@ public class MainController implements IRootController {
     private void showCongratsDialog() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Bravo!!!");
-        alert.setHeaderText("Congratulations "+username+"!\n\nYou guessed it right.");
+        alert.setHeaderText("Congratulations " + username + "!\n\nYou guessed it right.");
         alert.setContentText("Correct Number: %d\nTotal attempts: %d".formatted(systemGeneratedNumber, guessCount));
 
         ImageView congratsIcon = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/congrats.png"))));
@@ -192,7 +193,7 @@ public class MainController implements IRootController {
     private void showGameOverDialog() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("😭😭😭!!!");
-        alert.setHeaderText("Game Over!\n\nWhy "+username+" Why 😭?.");
+        alert.setHeaderText("Game Over!\n\nWhy " + username + " Why 😭?.");
         alert.setContentText("Correct Number: %d\nTotal attempts: %d".formatted(systemGeneratedNumber, guessCount));
 
         ImageView congratsIcon = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/game_over.png"))));
