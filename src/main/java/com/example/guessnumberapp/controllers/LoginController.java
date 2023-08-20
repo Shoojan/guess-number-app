@@ -1,5 +1,6 @@
-package com.example.guessnumberapp;
+package com.example.guessnumberapp.controllers;
 
+import com.example.guessnumberapp.MainApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

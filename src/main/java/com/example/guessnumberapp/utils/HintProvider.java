@@ -1,4 +1,4 @@
-package com.example.guessnumberapp;
+package com.example.guessnumberapp.utils;
 
 public class HintProvider {
 
